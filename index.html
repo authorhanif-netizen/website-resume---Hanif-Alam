@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -83,6 +84,15 @@ nav a{font-size:.86rem;font-weight:500;color:var(--ink-soft);text-decoration:non
 nav a:hover,nav a:focus-visible{background:var(--tint);color:var(--ultra-deep)}
 nav a.cta{background:var(--ink);color:#fff}
 nav a.cta:hover{background:var(--ultramarine);color:#fff}
+.nav-links{display:flex;align-items:center;gap:6px}
+.menu-btn{display:none;width:40px;height:40px;border-radius:50%;border:none;background:none;
+  cursor:pointer;flex-direction:column;align-items:center;justify-content:center;gap:5px;
+  transition:background .25s}
+.menu-btn:hover{background:var(--tint)}
+.menu-btn span{display:block;width:17px;height:2px;border-radius:2px;background:var(--ink);
+  transition:transform .35s cubic-bezier(.2,.7,.2,1),opacity .25s}
+nav.open .menu-btn span:nth-child(1){transform:translateY(3.5px) rotate(45deg)}
+nav.open .menu-btn span:nth-child(2){transform:translateY(-3.5px) rotate(-45deg)}
 
 /* ============================================================
    LAYOUT + TYPE
@@ -315,7 +325,19 @@ footer{padding:34px 0 46px;text-align:center;font-family:var(--font-mono);font-s
   .reveal{opacity:1;transform:none}
 }
 @media (max-width:880px){
-  nav a:not(.cta){display:none}
+  .menu-btn{display:flex}
+  .nav-links{
+    position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(-8px);
+    width:min(300px,calc(100vw - 40px));flex-direction:column;align-items:stretch;gap:2px;
+    padding:10px;border-radius:var(--r-md);
+    background:var(--glass-strong);
+    -webkit-backdrop-filter:blur(var(--blur)) saturate(160%);
+    backdrop-filter:blur(var(--blur)) saturate(160%);
+    border:1px solid var(--glass-border);box-shadow:var(--glass-shadow);
+    opacity:0;pointer-events:none;visibility:hidden;
+    transition:opacity .3s cubic-bezier(.2,.7,.2,1),transform .3s cubic-bezier(.2,.7,.2,1),visibility .3s}
+  nav.open .nav-links{opacity:1;pointer-events:auto;visibility:visible;transform:translateX(-50%) translateY(0)}
+  .nav-links a{padding:13px 16px;font-size:.95rem;text-align:left;border-radius:var(--r-sm)}
   .hero{padding-top:96px}
   .hero-grid{grid-template-columns:1fr;gap:34px}
   .hero h1{font-size:clamp(3.4rem,15vw,4.6rem)}
@@ -357,14 +379,19 @@ footer{padding:34px 0 46px;text-align:center;font-family:var(--font-mono);font-s
 </div>
 <div class="grain" aria-hidden="true"></div>
 
-<nav class="glass" aria-label="Primary">
+<nav class="glass" id="nav" aria-label="Primary">
   <span class="mark">HA·26</span>
-  <a href="#experience">Experience</a>
-  <a href="#projects">Projects</a>
-  <a href="#skills">Skills</a>
-  <a href="#education">Education</a>
-  <a href="#awards">Awards</a>
+  <div class="nav-links" id="navLinks">
+    <a href="#experience">Experience</a>
+    <a href="#projects">Projects</a>
+    <a href="#skills">Skills</a>
+    <a href="#education">Education</a>
+    <a href="#awards">Awards</a>
+  </div>
   <a href="#contact" class="cta">Contact</a>
+  <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="navLinks">
+    <span></span><span></span>
+  </button>
 </nav>
 
 <main id="app" class="wrap"></main>
@@ -825,14 +852,60 @@ if (!reducedMotion) {
     });
   });
   const lens = document.getElementById("lens");
-  lens.addEventListener("pointermove", e => {
-    const b = lens.getBoundingClientRect();
-    const rx = ((e.clientY - b.top) / b.height - .5) * -6;
-    const ry = ((e.clientX - b.left) / b.width - .5) * 6;
+  const applyTilt = (rx, ry) =>
     lens.style.transform = `perspective(900px) rotateX(${rx}deg) rotateY(${ry}deg)`;
+
+  /* Desktop: tilt follows the cursor */
+  lens.addEventListener("pointermove", e => {
+    if (e.pointerType !== "mouse") return;
+    const b = lens.getBoundingClientRect();
+    applyTilt(((e.clientY - b.top) / b.height - .5) * -6,
+              ((e.clientX - b.left) / b.width - .5) * 6);
   });
   lens.addEventListener("pointerleave", () => lens.style.transform = "");
+
+  /* Mobile: tilt follows how the phone is held (gyroscope) */
+  const clamp = (v, m) => Math.max(-m, Math.min(m, v));
+  let beta0 = null;
+  const gyroTilt = e => {
+    if (e.beta === null || e.gamma === null) return;
+    if (beta0 === null) beta0 = e.beta;           /* calibrate to holding angle */
+    applyTilt(clamp((beta0 - e.beta) / 5, 6), clamp(e.gamma / 5, 6));
+  };
+  const hasTouch = matchMedia("(hover: none)").matches;
+  if (hasTouch && "DeviceOrientationEvent" in window) {
+    if (typeof DeviceOrientationEvent.requestPermission === "function") {
+      /* iOS needs a tap to grant motion access */
+      lens.addEventListener("click", () => {
+        DeviceOrientationEvent.requestPermission()
+          .then(s => { if (s === "granted") addEventListener("deviceorientation", gyroTilt); })
+          .catch(() => {});
+      }, { once: true });
+    } else {
+      addEventListener("deviceorientation", gyroTilt);
+    }
+  }
 }
+
+/* ---------- Mobile navigation menu ---------- */
+const nav = document.getElementById("nav");
+const menuBtn = document.getElementById("menuBtn");
+const navLinks = document.getElementById("navLinks");
+menuBtn.addEventListener("click", () => {
+  const open = nav.classList.toggle("open");
+  menuBtn.setAttribute("aria-expanded", open);
+  menuBtn.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+});
+navLinks.querySelectorAll("a").forEach(a => a.addEventListener("click", () => {
+  nav.classList.remove("open");
+  menuBtn.setAttribute("aria-expanded", "false");
+}));
+document.addEventListener("click", e => {
+  if (nav.classList.contains("open") && !nav.contains(e.target)) {
+    nav.classList.remove("open");
+    menuBtn.setAttribute("aria-expanded", "false");
+  }
+});
 
 </script>
 </body>
