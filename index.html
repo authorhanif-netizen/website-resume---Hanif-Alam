@@ -85,12 +85,12 @@ nav{
 nav .mark{font-family:var(--font-mono);font-weight:700;font-size:.8rem;letter-spacing:.06em;
   padding:8px 14px;color:var(--ultra-deep)}
 nav a{font-size:.86rem;font-weight:500;color:var(--ink-soft);text-decoration:none;
-  padding:8px 14px;border-radius:999px;transition:background .25s,color .25s}
+  min-height:44px;display:inline-flex;align-items:center;padding:8px 14px;border-radius:999px;transition:background .25s,color .25s}
 nav a:hover,nav a:focus-visible{background:var(--tint);color:var(--ultra-deep)}
 nav a.cta{background:var(--ink);color:#fff}
 nav a.cta:hover{background:var(--ultramarine);color:#fff}
 .nav-links{display:flex;align-items:center;gap:6px}
-.menu-btn{display:none;width:40px;height:40px;border-radius:50%;border:none;background:none;
+.menu-btn{display:none;width:44px;height:44px;border-radius:50%;border:none;background:none;
   cursor:pointer;flex-direction:column;align-items:center;justify-content:center;gap:5px;
   transition:background .25s}
 .menu-btn:hover{background:var(--tint)}
@@ -129,9 +129,9 @@ nav.open .menu-btn span:nth-child(2){transform:translateY(-3.5px) rotate(-45deg)
 .menu-sheet.open a:nth-of-type(5){transition-delay:.25s}
 .menu-sheet.open a:nth-of-type(6){transition-delay:.3s}
 .menu-sheet a:active,.menu-sheet a:hover{color:var(--ultra-deep);font-style:italic;padding-left:12px}
-.menu-sheet a .idx{font-family:var(--font-mono);font-size:.68rem;font-weight:700;
+.menu-sheet a .idx{font-family:var(--font-mono);font-size:.75rem;font-weight:700;
   letter-spacing:.16em;color:var(--ultramarine);font-style:normal}
-.menu-sheet .sheet-foot{margin-top:38px;font-family:var(--font-mono);font-size:.7rem;
+.menu-sheet .sheet-foot{margin-top:38px;font-family:var(--font-mono);font-size:.75rem;
   letter-spacing:.1em;text-transform:uppercase;color:var(--ink-soft);
   opacity:0;transition:opacity .55s .35s}
 .menu-sheet.open .sheet-foot{opacity:1}
@@ -142,7 +142,7 @@ html.menu-locked,html.menu-locked body{overflow:hidden}
    ============================================================ */
 .wrap{max-width:1160px;margin:0 auto;padding:0 clamp(20px,4vw,48px)}
 section{padding:clamp(72px,10vh,130px) 0}
-.eyebrow{font-family:var(--font-mono);font-size:.72rem;font-weight:700;letter-spacing:.22em;
+.eyebrow{font-family:var(--font-mono);font-size:.75rem;font-weight:700;letter-spacing:.22em;
   text-transform:uppercase;color:var(--ultramarine);display:flex;align-items:center;gap:12px;margin-bottom:22px}
 .eyebrow::after{content:"";height:1px;width:56px;background:var(--ultramarine);opacity:.5}
 h2{font-family:var(--font-display);font-weight:400;font-size:clamp(2.1rem,4.4vw,3.3rem);
@@ -156,9 +156,9 @@ h2 em{font-style:italic;color:var(--ultramarine)}
 /* ============================================================
    HERO
    ============================================================ */
-.hero{min-height:100svh;display:flex;align-items:center;padding-top:110px}
+.hero{padding:clamp(108px,15vh,150px) 0 0}
 .hero-grid{display:grid;grid-template-columns:1.4fr .9fr;gap:clamp(28px,5vw,72px);align-items:center;width:100%}
-.hero .kicker{font-family:var(--font-mono);font-size:.72rem;font-weight:700;letter-spacing:.24em;
+.hero .kicker{font-family:var(--font-mono);font-size:.75rem;font-weight:700;letter-spacing:.24em;
   text-transform:uppercase;color:var(--ultramarine);margin-bottom:20px;display:flex;align-items:center;gap:12px}
 .hero .kicker::before{content:"";width:34px;height:1px;background:var(--ultramarine)}
 .hero h1{font-family:var(--font-display);font-weight:400;font-size:clamp(3.2rem,8.4vw,6.6rem);
@@ -170,7 +170,7 @@ h2 em{font-style:italic;color:var(--ultramarine)}
 .hero .role{margin-top:26px;font-size:1.1rem;color:var(--ink-soft);max-width:54ch}
 .hero .role b{color:var(--ink);font-weight:600}
 .hero .domains{margin-top:22px;display:flex;flex-wrap:wrap;gap:8px}
-.hero .domains span{font-family:var(--font-mono);font-size:.68rem;letter-spacing:.08em;padding:7px 14px;
+.hero .domains span{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.08em;padding:7px 14px;
   border-radius:999px;background:rgba(255,255,255,.5);border:1px solid var(--glass-border);color:var(--ink-soft)}
 .hero-links{display:flex;gap:12px;margin-top:32px;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;gap:9px;padding:13px 24px;border-radius:999px;
@@ -186,26 +186,20 @@ h2 em{font-style:italic;color:var(--ultramarine)}
 .lens{position:relative;border-radius:var(--r-lg);padding:14px;transform-style:preserve-3d;transition:transform .4s cubic-bezier(.2,.7,.2,1)}
 .lens img{width:100%;display:block;border-radius:calc(var(--r-lg) - 8px);aspect-ratio:1;object-fit:cover}
 .lens .tag{position:absolute;left:26px;bottom:26px;right:26px;border-radius:var(--r-sm);
-  padding:12px 16px;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.04em;line-height:1.65}
+  padding:12px 16px;font-family:var(--font-mono);font-size:.75rem;letter-spacing:.04em;line-height:1.65}
 .lens .tag b{color:var(--ultra-deep)}
 
 /* ============================================================
-   CREDENTIAL CAPSULES (hero highlight strip)
+   NUMBER STRIP (four figures under the hero; static, not buttons)
    ============================================================ */
-.creds{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:clamp(48px,8vh,84px)}
-.cred{border-radius:var(--r-md);padding:26px 24px 22px;position:relative;overflow:hidden;
-  transition:transform .35s cubic-bezier(.2,.7,.2,1),background .35s}
-.cred:hover{transform:translateY(-6px);background:var(--tint);border-color:var(--tint-border);box-shadow:var(--tint-shadow)}
-.cred:hover .v{color:var(--ultra-deep)}
-.cred::after{content:"";position:absolute;left:24px;right:24px;bottom:0;height:2px;
-  background:linear-gradient(90deg,var(--ultramarine),var(--cyan));border-radius:2px;
-  transform:scaleX(0);transform-origin:left;transition:transform .45s cubic-bezier(.2,.7,.2,1)}
-.cred:hover::after{transform:scaleX(1)}
-.cred .k{font-family:var(--font-mono);font-size:.7rem;font-weight:700;letter-spacing:.18em;
-  text-transform:uppercase;color:var(--ultramarine)}
-.cred .v{font-family:var(--font-display);font-size:clamp(1.35rem,2.1vw,1.8rem);line-height:1.14;margin-top:12px}
-.cred .v em{font-style:italic;color:var(--ultra-deep)}
-.cred .d{font-size:.82rem;color:var(--ink-soft);margin-top:10px}
+.stats{list-style:none;display:grid;grid-template-columns:repeat(4,1fr);border-radius:var(--r-md);
+  margin-top:clamp(36px,6vh,56px);overflow:hidden}
+.stat{padding:clamp(22px,2.4vw,30px) clamp(20px,2.4vw,30px);border-left:1px solid rgba(16,19,33,.08);
+  display:flex;flex-direction:column;gap:10px}
+.stat:first-child{border-left:none}
+.stat .n{font-family:var(--font-display);font-size:clamp(2.5rem,4.2vw,3.5rem);line-height:1;letter-spacing:-.01em;color:var(--ink)}
+.stat .n em{font-style:italic;color:var(--ultramarine);font-size:.62em;margin-left:.05em}
+.stat .d{font-size:.9rem;line-height:1.45;color:var(--ink-soft);max-width:27ch}
 /* ============================================================
    EDUCATION
    ============================================================ */
@@ -213,7 +207,7 @@ h2 em{font-style:italic;color:var(--ultramarine)}
 .edu{border-radius:var(--r-md);padding:clamp(24px,3vw,36px);display:flex;flex-direction:column;
   transition:transform .35s cubic-bezier(.2,.7,.2,1),background .35s}
 .edu:hover{transform:translateY(-6px);background:var(--tint);border-color:var(--tint-border);box-shadow:var(--tint-shadow)}
-.edu .when{font-family:var(--font-mono);font-size:.7rem;font-weight:700;letter-spacing:.14em;color:var(--ultramarine)}
+.edu .when{font-family:var(--font-mono);font-size:.75rem;font-weight:700;letter-spacing:.14em;color:var(--ultramarine)}
 .edu h3{font-family:var(--font-display);font-weight:400;font-size:clamp(1.5rem,2.4vw,1.9rem);line-height:1.14;margin:12px 0 4px}
 .edu .deg{font-size:.94rem;color:var(--ink-soft)}
 .edu .score{margin:16px 0;padding:11px 14px;border-radius:var(--r-sm);width:fit-content;
@@ -233,7 +227,7 @@ h2 em{font-style:italic;color:var(--ultramarine)}
   transition:transform .35s cubic-bezier(.2,.7,.2,1),background .35s}
 .xp:hover{transform:translateX(8px);background:var(--tint);border-color:var(--tint-border);box-shadow:var(--tint-shadow)}
 .xp:hover h3{color:var(--ultra-deep)}
-.xp .when{font-family:var(--font-mono);font-size:.74rem;letter-spacing:.06em;color:var(--ultramarine);font-weight:700;padding-top:5px}
+.xp .when{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.06em;color:var(--ultramarine);font-weight:700;padding-top:5px}
 .xp h3{font-family:var(--font-display);font-weight:400;font-size:1.55rem;line-height:1.15}
 .xp .org{font-size:.92rem;color:var(--ink-soft);margin:4px 0 12px}
 .xp ul{list-style:none;display:flex;flex-direction:column;gap:8px}
@@ -263,7 +257,7 @@ h2 em{font-style:italic;color:var(--ultramarine)}
 .track.dragging{cursor:grabbing;scroll-snap-type:none}
 .track.dragging .pcard{pointer-events:none}
 .pcard{flex:0 0 clamp(300px,34vw,430px);scroll-snap-align:start;border-radius:var(--r-lg);
-  padding:clamp(22px,2.6vw,32px);display:flex;flex-direction:column;min-height:clamp(380px,52vh,470px);
+  padding:clamp(22px,2.6vw,32px);display:flex;flex-direction:column;
   position:relative;overflow:hidden;user-select:none}
 .pcard::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .4s;
   background:radial-gradient(460px circle at var(--mx,50%) var(--my,50%),rgba(39,64,214,.12),transparent 46%)}
@@ -271,14 +265,14 @@ h2 em{font-style:italic;color:var(--ultramarine)}
 .pcard{transition:border-color .35s,box-shadow .35s}
 .pcard:hover{border-color:var(--tint-border);box-shadow:var(--tint-shadow)}
 .pcard:hover h3{color:var(--ultra-deep)}
-.pcard .cat{font-family:var(--font-mono);font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--ultramarine)}
+.pcard .cat{font-family:var(--font-mono);font-size:.75rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--ultramarine)}
 .pcard h3{font-family:var(--font-display);font-weight:400;font-size:clamp(1.5rem,2.2vw,1.9rem);line-height:1.12;margin:14px 0 6px}
-.pcard .when{font-family:var(--font-mono);font-size:.7rem;color:var(--ink-soft);letter-spacing:.05em}
+.pcard .when{font-family:var(--font-mono);font-size:.75rem;color:var(--ink-soft);letter-spacing:.05em}
 .pcard p{color:var(--ink-soft);font-size:.93rem;margin-top:14px;flex:1}
 .pcard .win{margin-top:14px;padding:11px 14px;border-radius:var(--r-sm);background:rgba(39,64,214,.08);
   border:1px solid rgba(39,64,214,.16);font-size:.84rem;color:var(--ultra-deep);font-weight:500}
 .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:16px}
-.chip{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.04em;padding:5px 11px;border-radius:999px;
+.chip{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.04em;padding:5px 11px;border-radius:999px;
   background:rgba(255,255,255,.55);border:1px solid var(--glass-border);color:var(--ink-soft)}
 .pcard .plink{margin-top:18px;display:inline-flex;align-items:center;gap:8px;font-weight:600;font-size:.86rem;
   color:var(--ultra-deep);text-decoration:none;cursor:pointer;font-family:var(--font-body);width:fit-content;
@@ -289,7 +283,7 @@ h2 em{font-style:italic;color:var(--ultramarine)}
 .pcard .plink:active{transform:translateY(-1px) scale(.97)}
 .pcard .plink::after{content:"↗";transition:transform .3s}
 .pcard .plink:hover::after{transform:translate(3px,-3px)}
-.rail-hint{font-family:var(--font-mono);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;
+.rail-hint{font-family:var(--font-mono);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;
   color:var(--ink-soft);margin-top:6px;opacity:.7}
 
 /* ============================================================
@@ -303,7 +297,7 @@ h2 em{font-style:italic;color:var(--ultramarine)}
   font-size:clamp(1.25rem,2vw,1.7rem);color:var(--ink-soft);
   transition:background .3s,color .3s,padding-left .3s;flex:1}
 .domain:last-child{border-bottom:none}
-.domain .idx{font-family:var(--font-mono);font-size:.7rem;font-weight:700;letter-spacing:.14em;color:var(--ink-soft);opacity:.6}
+.domain .idx{font-family:var(--font-mono);font-size:.75rem;font-weight:700;letter-spacing:.14em;color:var(--ink-soft);opacity:.6}
 .domain:hover{background:rgba(39,64,214,.04);color:var(--ink)}
 .domain.active{background:var(--tint);box-shadow:inset 3px 0 0 var(--ultramarine);color:var(--ultra-deep);font-style:italic;
   padding-left:calc(clamp(20px,2.6vw,32px) + 10px)}
@@ -314,7 +308,7 @@ h2 em{font-style:italic;color:var(--ultramarine)}
 .domain-detail .proof{margin-top:14px;font-size:.9rem;color:var(--ink-soft);
   padding-left:16px;border-left:2px solid var(--ultramarine)}
 .domain-detail .chips{margin-top:22px}
-.domain-detail .chip{font-size:.72rem;padding:8px 14px;background:rgba(255,255,255,.6)}
+.domain-detail .chip{font-size:.75rem;padding:8px 14px;background:rgba(255,255,255,.6)}
 .domain-detail.fading{opacity:0;transform:translateY(8px)}
 .domain-detail>*{transition:opacity .3s,transform .3s}
 
@@ -333,7 +327,7 @@ h2 em{font-style:italic;color:var(--ultramarine)}
 .award h3{font-size:1.02rem;font-weight:600}
 .award p{color:var(--ink-soft);font-size:.9rem;margin-top:3px}
 .award .alink{font-weight:600;font-size:.84rem;color:var(--ultra-deep);text-decoration:none;white-space:nowrap;
-  display:inline-flex;align-items:center;gap:6px;padding:9px 16px;border-radius:999px;
+  display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:9px 16px;border-radius:999px;
   background:rgba(39,64,214,.08);border:1px solid rgba(39,64,214,.16);transition:background .3s,color .3s}
 .award .alink:hover{background:var(--ultramarine);color:#fff}
 
@@ -343,7 +337,12 @@ h2 em{font-style:italic;color:var(--ultramarine)}
 .contact-card{border-radius:var(--r-lg);padding:clamp(40px,7vw,80px);text-align:center;position:relative;overflow:hidden}
 .contact-card h2{font-size:clamp(2.4rem,5.5vw,4.2rem)}
 .contact-card .lede{margin:0 auto 34px}
-footer{padding:34px 0 46px;text-align:center;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.08em;color:var(--ink-soft)}
+.contact-alt{margin-top:22px;display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap;
+  font-family:var(--font-mono);font-size:.8rem;letter-spacing:.04em;color:var(--ink-soft)}
+.contact-alt a{color:var(--ink-soft);text-decoration:underline;text-underline-offset:4px;
+  text-decoration-color:rgba(16,19,33,.25);padding:12px 4px;transition:color .25s}
+.contact-alt a:hover{color:var(--ultra-deep)}
+footer{padding:34px 0 46px;text-align:center;font-family:var(--font-mono);font-size:.75rem;letter-spacing:.08em;color:var(--ink-soft)}
 
 /* ============================================================
    VIDEO MODAL
@@ -376,10 +375,13 @@ footer{padding:34px 0 46px;text-align:center;font-family:var(--font-mono);font-s
   .hero .role{font-size:1.02rem}
   .hero .kicker{letter-spacing:.14em}
   .lens{max-width:340px;margin:0 auto;width:100%}
-  .creds{grid-template-columns:1fr 1fr;gap:12px}
-  .cred{padding:20px 18px 18px}
-  .cred .v{font-size:1.22rem}
-  .cred .d{font-size:.78rem}
+  .stats{grid-template-columns:1fr 1fr}
+  .stat{padding:20px 18px}
+  .stat:nth-child(odd){border-left:none}
+  .stat:nth-child(n+3){border-top:1px solid rgba(16,19,33,.08)}
+  .stat .n{font-size:2.3rem}
+  .stat .d{font-size:.82rem}
+  .pcard .chips .chip:nth-child(n+4){display:none}
   .xp{grid-template-columns:1fr;gap:8px}
   .pcard{flex-basis:84vw;min-height:0}
   .arrows{display:none}
@@ -397,8 +399,6 @@ footer{padding:34px 0 46px;text-align:center;font-family:var(--font-mono);font-s
   .contact-card .btn{justify-content:center;word-break:break-all}
 }
 @media (max-width:480px){
-  .creds{grid-template-columns:1fr 1fr}
-  .cred .v{font-size:1.1rem}
   .orb{opacity:.42}
 }
 .hint-mobile{display:none}
@@ -462,12 +462,12 @@ const DATA = {
     phone: "+91 9324524027",
     shroffVideo: "https://www.youtube.com/watch?v=sxImF_ZpLq0"
   },
-  /* Credential capsules under the hero: four equal cards */
-  creds: [
-    { k: "Enterprise Impact", v: "80% <em>faster</em>", d: "Automation shipped at Deutsche Bank, Corporate Bank" },
-    { k: "Shipped Product", v: "<em>69</em> economies, live", d: "Recession Clock, powered by IRIS, the ensemble model I designed" },
-    { k: "Research", v: "Two papers, <em>two fields</em>", d: "Monetary economics (TIES, under review) · Speech AI (ITAI 2026)" },
-    { k: "National Stage", v: "Top of <em>1.2 lakh</em>", d: "CNBC TV18 Skill Titans semi-finalist for We-Start" }
+  /* Number strip under the hero: four figures, one line each */
+  stats: [
+    { n: "9.15<em>/10</em>", d: "CGPA, B.Com Economics & Analytics at NM College" },
+    { n: "48", d: "Banks modelled across 12 years of RBI data in my monetary policy research" },
+    { n: "91<em>%</em>", d: "Of Recession Clock's one-quarter recession alerts came true on unseen data" },
+    { n: "80<em>%</em>", d: "Faster processing from workflow automation at Deutsche Bank" }
   ],
   experience: [
     {
@@ -478,8 +478,7 @@ const DATA = {
         "Received a pre-placement offer for a full-time Analyst role: the only intern in the cohort to be offered one.",
         "Architected end-to-end workflow automation on Microsoft Power Platform across 3+ cross-functional teams: 80% faster processing while closing critical data-leakage risks.",
         "Built a secure AI prompt-generator interface with compliance-focused prompt engineering, cutting user translation time by 40%.",
-        "Developed a Python analytics pipeline for benchmark analysis and client sentiment modelling.",
-        "Authored the Business Requirement Documents and led adoption through UX research and stakeholder iteration."
+        "Developed a Python analytics pipeline for benchmark and client sentiment analysis, and authored the Business Requirement Documents behind the rollout."
       ]
     },
     {
@@ -488,8 +487,7 @@ const DATA = {
       org: "N.M. College of Commerce & Economics",
       points: [
         "Designed HEAR, a deep-learning architecture combining HuBERT embeddings with attention for speech emotion recognition: 87% accuracy, 0.88 macro-F1.",
-        "Paper presented at the ITAI 2026 international conference; publication in Springer proceedings pending.",
-        "Ran the full ML pipeline: preprocessing, feature extraction, training, hyperparameter optimisation and evaluation."
+        "Paper accepted in Springer and presented at the ITAI 2026 international conference."
       ]
     },
     {
@@ -507,7 +505,7 @@ const DATA = {
       cat: "ML Product · Live",
       title: "Recession Clock, powered by IRIS",
       when: "AUG – SEP 2026",
-      desc: "A live tool that reads recession risk for 69 economies, 1, 2 and 4 quarters ahead. I designed IRIS, a stacked ensemble of SARIMAX, an LSTM, gradient-boosted trees and an Elastic Net, then built the backend and interface and led the 9-member ML Ops team. To fit a free-tier server I rewrote the LSTM in plain NumPy, so production never loads PyTorch and a forecast takes milliseconds.",
+      desc: "Reads recession risk for 69 economies, 1, 2 and 4 quarters ahead. I designed IRIS, a stacked ensemble of four models, built the backend and interface, and led the 9-member team. The LSTM runs in plain NumPy, so it fits a free-tier server and answers in milliseconds.",
       win: "ROC-AUC 0.92 to 0.99 and 87 to 91% alert precision on unseen 2020 onwards data",
       chips: ["Python", "Ensemble ML", "Time Series", "Dash", "Project Management"],
       link: "https://recessionclock.in",
@@ -517,8 +515,8 @@ const DATA = {
       cat: "Research · Monetary Economics",
       title: "Do Rate Cuts Travel Faster Than Hikes?",
       when: "2026",
-      desc: "Asymmetric Monetary Policy Transmission in India: a comparative study of lending rates under MCLR and EBLR, a co-authored research paper. Nonlinear ARDL and fixed-effects panel models on RBI data for 48 banks, January 2014 to June 2026.",
-      win: "Finding: under external benchmarks, cuts pass through about twice as fully as hikes. Submitted to the 61st TIES Annual Conference (under review)",
+      desc: "How RBI rate changes reach bank lending rates under MCLR and EBLR. A co-authored research paper using nonlinear ARDL and panel models on RBI data for 48 banks, 2014 to 2026.",
+      win: "Cuts now pass through about twice as fully as hikes · Submitted to the 61st TIES Annual Conference",
       chips: ["Econometrics", "NARDL", "Panel Data", "RBI Data", "Python"]
     },
     {
@@ -526,7 +524,7 @@ const DATA = {
       title: "HEAR: Speech Emotion Recognition",
       when: "JUL 2025 – MAR 2026",
       desc: "A HuBERT-enhanced, attention-driven recurrent network for speech emotion recognition. Full pipeline from literature review and gap identification to a new architecture and a peer-reviewed paper.",
-      win: "87% accuracy, 0.88 macro-F1 · Presented at ITAI 2026, Springer proceedings pending",
+      win: "87% accuracy, 0.88 macro-F1 · Accepted in Springer (ITAI 2026)",
       chips: ["HuBERT", "Deep Learning", "PyTorch", "Research Writing"]
     },
     {
@@ -558,26 +556,6 @@ const DATA = {
       chips: ["Field Research", "Microeconomics", "Python", "Policy"],
       link: "https://www.linkedin.com/feed/update/urn:li:activity:7404346632772927489/",
       linkText: "Read the study"
-    },
-    {
-      cat: "Data Analysis",
-      title: "Geopolitics, Power & Air Quality",
-      when: "2025",
-      desc: "Analysed 32,000+ rows of WHO air-quality data, mapping colonial history, trade openness and military expenditure to pollution outcomes across nations.",
-      win: "Key finding: former colonising nations breathe the cleanest air. The industrial cost was exported",
-      chips: ["Python", "Pandas", "Data Wrangling", "Environmental Economics"],
-      link: "https://www.linkedin.com/feed/update/urn:li:activity:7349124786477760515/",
-      linkText: "Read the analysis"
-    },
-    {
-      cat: "Macroeconomics",
-      title: "The Story of Inflation",
-      when: "AUG – SEP 2025",
-      desc: "GDP deflator analysis across 266 countries, 1960–2024, with a what-if global-conflict scenario simulating inflationary response to rising defence budgets, distilled into a single infographic.",
-      win: "Simulated a global-conflict inflation shock across 266 economies and 60+ years of data",
-      chips: ["Python", "Macroeconomics", "Data Viz", "Infographics"],
-      link: "https://www.linkedin.com/feed/update/urn:li:activity:7375199276475383808/",
-      linkText: "See the infographic"
     }
   ],
   /* Skills: six career domains. Each has a statement, a proof line, and tools. */
@@ -603,7 +581,7 @@ const DATA = {
     {
       domain: "Research",
       statement: "Peer-reviewed, not just <em>proofread.</em>",
-      proof: "Two papers: speech emotion recognition, presented at ITAI 2026 (Springer proceedings pending), and monetary transmission in India, submitted to the 61st TIES Annual Conference.",
+      proof: "Two papers: speech emotion recognition, accepted in Springer (ITAI 2026), and monetary transmission in India, submitted to the 61st TIES Annual Conference.",
       chips: ["Literature review", "Research gap identification", "Statistical modelling", "Technical writing", "Data storytelling", "EViews · statsmodels"]
     },
     {
@@ -684,15 +662,11 @@ app.innerHTML = `
     </div>
   </section>
 
-  <div class="creds reveal">
-    ${DATA.creds.map(c => `
-      <div class="cred glass">
-        <div class="k">${c.k}</div>
-        <div class="v">${c.v}</div>
-        <div class="d">${c.d}</div>
-      </div>
+  <ul class="stats glass reveal" aria-label="Key figures">
+    ${DATA.stats.map(s => `
+      <li class="stat"><span class="n">${s.n}</span><span class="d">${s.d}</span></li>
     `).join("")}
-  </div>
+  </ul>
 
   <section id="experience">
     <p class="eyebrow reveal">01 — Experience</p>
@@ -799,9 +773,8 @@ app.innerHTML = `
         <a class="btn btn-primary" href="mailto:${DATA.links.email}">${DATA.links.email}</a>
         <a class="btn btn-glass glass" href="${DATA.links.linkedin}" target="_blank" rel="noopener">LinkedIn ↗</a>
         <a class="btn btn-glass glass" href="${DATA.links.resume}" target="_blank" rel="noopener">Résumé (PDF) ↓</a>
-        <a class="btn btn-glass glass" href="${DATA.links.github}" target="_blank" rel="noopener">GitHub ↗</a>
-        <a class="btn btn-glass glass" href="tel:${DATA.links.phone.replace(/\s/g,"")}">${DATA.links.phone}</a>
       </div>
+      <p class="contact-alt"><a href="${DATA.links.github}" target="_blank" rel="noopener">GitHub</a><span aria-hidden="true">·</span><a href="tel:${DATA.links.phone.replace(/\s/g,"")}">${DATA.links.phone}</a></p>
     </div>
   </section>
 `;
